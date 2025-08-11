@@ -1,3 +1,4 @@
+import CartButton from "@/components/CartButton";
 import { images, offers } from "@/constants";
 import cn from "clsx";
 import { Image } from "expo-image";
@@ -74,7 +75,7 @@ export default function Index() {
                 />
               </TouchableOpacity>
             </View>
-            <Text>Cart</Text>
+            <CartButton />
           </View>
         )}
       />
