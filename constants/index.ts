@@ -1,19 +1,19 @@
-const avocado = require("@/assets/images/avocado.png");
-const bacon = require("@/assets/images/bacon.png");
-const burgerOne = require("@/assets/images/burger-one.png");
-const burgerTwo = require("@/assets/images/burger-two.png");
-const buritto = require("@/assets/images/buritto.png");
-const cheese = require("@/assets/images/cheese.png");
-const coleslaw = require("@/assets/images/coleslaw.png");
-const cucumber = require("@/assets/images/cucumber.png");
-const fries = require("@/assets/images/fries.png");
-const mozarellaSticks = require("@/assets/images/mozarella-sticks.png");
-const mushrooms = require("@/assets/images/mushrooms.png");
-const onionRings = require("@/assets/images/onion-rings.png");
-const onions = require("@/assets/images/onions.png");
-const pizzaOne = require("@/assets/images/pizza-one.png");
-const salad = require("@/assets/images/salad.png");
-const tomatoes = require("@/assets/images/tomatoes.png");
+import avocado from "@/assets/images/avocado.png";
+import bacon from "@/assets/images/bacon.png";
+import burgerOne from "@/assets/images/burger-one.png";
+import burgerTwo from "@/assets/images/burger-two.png";
+import buritto from "@/assets/images/buritto.png";
+import cheese from "@/assets/images/cheese.png";
+import coleslaw from "@/assets/images/coleslaw.png";
+import cucumber from "@/assets/images/cucumber.png";
+import fries from "@/assets/images/fries.png";
+import mozarellaSticks from "@/assets/images/mozarella-sticks.png";
+import mushrooms from "@/assets/images/mushrooms.png";
+import onionRings from "@/assets/images/onion-rings.png";
+import onions from "@/assets/images/onions.png";
+import pizzaOne from "@/assets/images/pizza-one.png";
+import salad from "@/assets/images/salad.png";
+import tomatoes from "@/assets/images/tomatoes.png";
 
 export const CATEGORIES = [
   {
