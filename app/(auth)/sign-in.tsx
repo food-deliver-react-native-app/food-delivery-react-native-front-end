@@ -1,5 +1,6 @@
 import CustomButton from "@/components/CustomButton";
 import CustomInput from "@/components/CustomInput";
+import { signIn } from "@/lib/auth";
 import { Link, router } from "expo-router";
 import React, { useState } from "react";
 import { Alert, Text, View } from "react-native";
@@ -9,15 +10,26 @@ const SignIn = () => {
   const [form, setForm] = useState({ email: "", password: "" });
 
   const submit = async () => {
-    if (!form.email || !form.password) {
-      console.log(form);
+    const { email, password } = form;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const hasSpecialSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    if (!email || !password) {
       return Alert.alert(
         "Error",
         "Please enter valid email address & password."
       );
+    } else if (!emailRegex) {
+      return Alert.alert("Error", "Invalid email format");
+    } else if (password.length < 8 || !hasSpecialSymbol) {
+      return Alert.alert(
+        "Error",
+        "Password must be at least 8 characters long and contain a special symbol."
+      );
     }
     setIsSubmitting(true);
     try {
+      await signIn({ email, password });
       Alert.alert("Success", "User signed in successfuly");
       router.replace("/");
     } catch (error: any) {

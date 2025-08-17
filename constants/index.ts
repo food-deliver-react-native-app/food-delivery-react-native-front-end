@@ -1,6 +1,5 @@
 import avocado from "@/assets/images/avocado.png";
 import bacon from "@/assets/images/bacon.png";
-import burgerOne from "@/assets/images/burger-one.png";
 import burgerTwo from "@/assets/images/burger-two.png";
 import buritto from "@/assets/images/buritto.png";
 import cheese from "@/assets/images/cheese.png";
@@ -14,6 +13,7 @@ import onions from "@/assets/images/onions.png";
 import pizzaOne from "@/assets/images/pizza-one.png";
 import salad from "@/assets/images/salad.png";
 import tomatoes from "@/assets/images/tomatoes.png";
+const burgerOne = require("@/assets/images/burger-one.png");
 
 export const CATEGORIES = [
   {
@@ -42,7 +42,7 @@ export const offers = [
   {
     id: 1,
     title: "SUMMER COMBO",
-    image: burgerOne,
+    image: require("@/assets/images/burger-one.png"),
     color: "#D33B0D",
   },
   {
