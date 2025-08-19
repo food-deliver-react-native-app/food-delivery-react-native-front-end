@@ -1,4 +1,5 @@
 import CartButton from "@/components/CartButton";
+import MenuCard from "@/components/MenuCard";
 import useAxios from "@/hooks/useAxios";
 import { MenuItem } from "@/type";
 import cn from "clsx";
@@ -38,6 +39,7 @@ const Search = () => {
         data={data}
         renderItem={({ item, index }) => {
           const isFirstRightColItem = index % 2 === 0;
+          console.log(item)
           return (
             <View
               key={item.id}
@@ -46,7 +48,7 @@ const Search = () => {
                 !isFirstRightColItem ? "mt-10" : "mt-0"
               )}
             >
-              <Text>Menu Card</Text>
+             <MenuCard  item={item as MenuItem} />
             </View>
           );
         }}
