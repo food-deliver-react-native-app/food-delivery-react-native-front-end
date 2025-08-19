@@ -1,7 +1,9 @@
 import CartButton from "@/components/CartButton";
+import Filter from "@/components/Filter";
 import MenuCard from "@/components/MenuCard";
+import SearchBar from "@/components/SearchBar";
 import useAxios from "@/hooks/useAxios";
-import { MenuItem } from "@/type";
+import { Category, MenuItem } from "@/type";
 import cn from "clsx";
 import { useLocalSearchParams } from "expo-router";
 import React, { useEffect } from "react";
@@ -39,7 +41,6 @@ const Search = () => {
         data={data}
         renderItem={({ item, index }) => {
           const isFirstRightColItem = index % 2 === 0;
-          console.log(item)
           return (
             <View
               key={item.id}
@@ -48,7 +49,7 @@ const Search = () => {
                 !isFirstRightColItem ? "mt-10" : "mt-0"
               )}
             >
-             <MenuCard  item={item as MenuItem} />
+              <MenuCard item={item as MenuItem} />
             </View>
           );
         }}
@@ -71,8 +72,8 @@ const Search = () => {
               </View>
               <CartButton />
             </View>
-            <Text>Search Input</Text>
-            <Text>Filter</Text>
+            <SearchBar />
+            <Filter categories={categories as Category[]} />
           </View>
         )}
         ListEmptyComponent={() => !loading && <Text>No Results!</Text>}
