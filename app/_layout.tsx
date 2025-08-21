@@ -1,11 +1,11 @@
-import useAuthStore from "@/store/auth.store";
+// import useAuthStore from "@/store/auth.store";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 import React, { useEffect } from "react";
 import "./global.css";
 
 export default function RootLayout() {
-  const { isLoading, fetchAuthentificatedUser } = useAuthStore();
+  // const { fetchAuthentificatedUser } = useAuthStore();
 
   const [fontsLoaded, error] = useFonts({
     "QuickSand-Bold": require("../assets/fonts/Quicksand-Bold.ttf"),

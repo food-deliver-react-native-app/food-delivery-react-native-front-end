@@ -12,7 +12,7 @@ import {
   View,
 } from "react-native";
 
-export default function _layout() {
+export default function LayoutWrapper() {
   const { isAuthentificated } = useAuthStore();
   if (isAuthentificated) return <Redirect href={"/"} />;
 

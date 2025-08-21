@@ -33,7 +33,7 @@ const Search = () => {
 
   useEffect(() => {
     refetch({ params: { category, query, limit: null } });
-  }, [category, query]);
+  }, [category, query,refetch]);
 
   return (
     <SafeAreaView className="bg-white h-full">
