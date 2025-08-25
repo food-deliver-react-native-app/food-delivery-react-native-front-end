@@ -1,8 +1,8 @@
 import { images } from "@/constants";
-// import useAuthStore from "@/store/auth.store";
+import useAuthStore from "@/store/auth.store";
 import { TabBarIconProps } from "@/type";
 import cn from "clsx";
-import {  Tabs } from "expo-router";
+import { Redirect, Tabs } from "expo-router";
 import React from "react";
 import { Image, Text, View } from "react-native";
 
@@ -24,13 +24,13 @@ const TabBarIcon = ({ focused, icon, title }: TabBarIconProps) => {
         {title}
       </Text>
     </View>
-  ); 
+  );
 };
 
 export default function TabLayout() {
-  // const { isAuthentificated } = useAuthStore();
+  const { isAuthentificated } = useAuthStore();
 
-  // if (!isAuthentificated) return <Redirect href="/sign-in" />;
+  if (!isAuthentificated) return <Redirect href="/sign-in" />;
   return (
     <Tabs
       screenOptions={{
@@ -68,16 +68,16 @@ export default function TabLayout() {
         options={{
           title: "Search",
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon title="Home" icon={images.search} focused={focused} />
+            <TabBarIcon title="Search" icon={images.search} focused={focused} />
           ),
         }}
-      />{" "}
+      />
       <Tabs.Screen
         name="cart"
         options={{
           title: "Cart",
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon title="Home" icon={images.bag} focused={focused} />
+            <TabBarIcon title="Cart" icon={images.bag} focused={focused} />
           ),
         }}
       />{" "}
@@ -86,7 +86,11 @@ export default function TabLayout() {
         options={{
           title: "Profile",
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon title="Home" icon={images.person} focused={focused} />
+            <TabBarIcon
+              title="Profile"
+              icon={images.person}
+              focused={focused}
+            />
           ),
         }}
       />

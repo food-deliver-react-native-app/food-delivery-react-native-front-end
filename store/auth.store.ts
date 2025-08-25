@@ -1,6 +1,7 @@
 import { getCurrentUser } from "@/lib/auth";
 import { User } from "@/type";
 import { create } from "zustand";
+import useCartStore from "./cart.store";
 
 type AuthState = {
   isAuthentificated: boolean;
@@ -28,6 +29,8 @@ const useAuthStore = create<AuthState>((set) => ({
     try {
       const user = await getCurrentUser();
       if (user) {
+        const { fetchCart } = useCartStore.getState();
+        await fetchCart();
         set({ isAuthentificated: true, user: user as User });
       } else {
         set({ isAuthentificated: false, user: null });

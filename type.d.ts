@@ -9,7 +9,9 @@ export interface MenuItem extends Models.Document {
   calories: number;
   protein: number;
   rating: number;
+  costumizations: CartCustomization[];
   image_url: string;
+  category: Category;
   type: string;
 }
 
@@ -22,6 +24,7 @@ export interface Category {
 export interface User extends Models.Document {
   name: string;
   email: string;
+  id: string;
   avatar: string;
 }
 
@@ -32,14 +35,36 @@ export interface CartCustomization {
   type: string;
 }
 
-export interface CartItemType {
-  id: string; // menu item id
+export type CartItemType = {
+  id: string;
+  menuId: string;
+  quantity: number;
+  menu?: {
+    id: string;
+    name: string;
+    price: number;
+  };
+  customizations?: {
+    costumization: {
+      id: string;
+      name: string;
+      price: number;
+      type: string;
+    };
+  }[];
+};
+
+export type Customization = {
+  [key: string]: string | boolean | number; // flexible for "extra cheese", "spicy sauce" etc.
+};
+
+export type CartItem = {
+  id: string; // product id
   name: string;
   price: number;
-  image_url: string;
   quantity: number;
-  customizations?: CartCustomization[];
-}
+  customizations?: Customization;
+};
 
 export interface CartStore {
   items: CartItemType[];
