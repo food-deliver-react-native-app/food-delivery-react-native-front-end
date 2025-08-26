@@ -20,11 +20,11 @@ export default function RootLayout() {
     if (fontsLoaded) SplashScreen.hideAsync();
   }, [fontsLoaded, error]);
 
-  useEffect(() => {
-    fetchAuthentificatedUser();
-  }, []);
+  // useEffect(() => {
+  //   fetchAuthentificatedUser();
+  // }, []);
 
-  if (!fontsLoaded || isLoading) return null;
+  // if (!fontsLoaded || isLoading) return null;
 
   return <Stack screenOptions={{ headerShown: false }} />;
 }

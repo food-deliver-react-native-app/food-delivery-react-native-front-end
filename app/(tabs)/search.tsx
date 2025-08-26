@@ -2,12 +2,13 @@ import CartButton from "@/components/CartButton";
 import Filter from "@/components/Filter";
 import MenuCard from "@/components/MenuCard";
 import SearchBar from "@/components/SearchBar";
+import { images } from "@/constants";
 import useAxios from "@/hooks/useAxios";
 import { Category, MenuItem } from "@/type";
 import cn from "clsx";
 import { useLocalSearchParams } from "expo-router";
 import React, { useEffect } from "react";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, Image, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Search = () => {
@@ -76,7 +77,21 @@ const Search = () => {
             <Filter categories={categories as Category[]} />
           </View>
         )}
-        ListEmptyComponent={() => !loading && <Text>No Results!</Text>}
+        ListEmptyComponent={() =>
+          !loading && (
+            <View className="flex-center">
+              <Image
+                className="size-full"
+                resizeMode="contain"
+                source={images.emptyState}
+              />
+              <Text className="h3-bold">Nothing matched your search</Text>
+              <Text className="base-regular mt-2">
+                Try a different search term or check for typos.
+              </Text>
+            </View>
+          )
+        }
       />
     </SafeAreaView>
   );
