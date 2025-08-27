@@ -2,10 +2,10 @@ import { images } from "@/constants";
 import useAuthStore from "@/store/auth.store";
 import useCartStore from "@/store/cart.store";
 import { TabBarIconProps } from "@/type";
-import cn from "clsx";
 import { Tabs } from "expo-router";
-import React from "react";
 import { Image, Text, View } from "react-native";
+import React = require("react");
+import cn = require("clsx");
 
 const TabBarIcon = ({ focused, icon, title }: TabBarIconProps) => {
   return (

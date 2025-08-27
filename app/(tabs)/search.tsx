@@ -5,11 +5,12 @@ import SearchBar from "@/components/SearchBar";
 import { images } from "@/constants";
 import useAxios from "@/hooks/useAxios";
 import { Category, MenuItem } from "@/type";
-import cn from "clsx";
 import { useLocalSearchParams } from "expo-router";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { FlatList, Image, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import cn = require("clsx");
+import React = require("react");
 
 const Search = () => {
   const { category, query } = useLocalSearchParams<{

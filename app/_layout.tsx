@@ -1,8 +1,9 @@
 import useAuthStore from "@/store/auth.store";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "./global.css";
+import React = require("react");
 
 export default function RootLayout() {
   const { fetchAuthentificatedUser, isLoading } = useAuthStore();
@@ -20,9 +21,9 @@ export default function RootLayout() {
     if (fontsLoaded) SplashScreen.hideAsync();
   }, [fontsLoaded, error]);
 
-  // useEffect(() => {
-  //   fetchAuthentificatedUser();
-  // }, []);
+  useEffect(() => {
+    fetchAuthentificatedUser();
+  }, []);
 
   // if (!fontsLoaded || isLoading) return null;
 

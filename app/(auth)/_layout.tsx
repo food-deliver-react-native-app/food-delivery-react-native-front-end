@@ -1,7 +1,6 @@
 import { images } from "@/constants";
 import useAuthStore from "@/store/auth.store";
 import { Redirect, Slot } from "expo-router";
-import React from "react";
 import {
   Dimensions,
   Image,
@@ -11,6 +10,7 @@ import {
   ScrollView,
   View,
 } from "react-native";
+import React = require("react");
 
 export default function LayoutWrapper() {
   const { isAuthentificated } = useAuthStore();

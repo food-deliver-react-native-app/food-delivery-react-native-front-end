@@ -1,9 +1,10 @@
+import CartCard from "@/components/CartCard";
 import SearchBar from "@/components/SearchBar";
 import { images } from "@/constants";
 import useCartStore from "@/store/cart.store";
-import cn from "clsx";
+import { CartItemType } from "@/type";
 import { router } from "expo-router";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FlatList,
   Image,
@@ -12,60 +13,63 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import cn = require("clsx");
+import React = require("react");
 
 const Cart = () => {
-  const { items: data } = useCartStore();
+  const { items: data, fetchCart } = useCartStore();
+
+  useEffect(() => {
+    fetchCart();
+  }, []);
 
   const [isSearchActive, setIsSearchActive] = useState(false);
 
   return (
-    <SafeAreaView className="bg-white h-full">
+    <SafeAreaView className="h-full">
       <FlatList
         data={data}
-        renderItem={({ item, index }) => {
-          const isFirstRightColItem = index % 2 === 0;
+        renderItem={({ item }) => {
           return (
-            <View
-              key={item.id}
-              className={cn(
-                "flex-1 max-w-[48%]",
-                !isFirstRightColItem ? "mt-10" : "mt-0"
-              )}
-            >
-              {/* <MenuCard item={item as MenuItem} /> */}
+            <View key={item.id}>
+              <CartCard item={item as CartItemType} />
             </View>
           );
         }}
         keyExtractor={(item) => item.id}
-        numColumns={2}
-        columnWrapperClassName="gap-7"
-        contentContainerClassName="gap-7 px-5 pb-32"
+        contentContainerClassName="gap-5 px-5 pb-32"
         ListHeaderComponent={() => (
           <View className="my-5 gap-5">
-            <View className="flex justify-between flex-row w-full">
-              <View className="flex-start">
+            <View className=" w-full">
+              <View className="flex-row justify-between">
                 <TouchableOpacity onPress={() => router.back()}>
                   <Image source={images.arrowBack} className="size-6" />
                 </TouchableOpacity>
-                <View className="flex-start felx-row gap-x-1 mt-5">
-                  <Text className="paragraph-semibold text-dark-100">
-                    This is location area
-                  </Text>
+                <View>
+                  {isSearchActive ? (
+                    <SearchBar />
+                  ) : (
+                    <TouchableOpacity onPress={() => setIsSearchActive(true)}>
+                      <Image
+                        source={images.search}
+                        className="size-6"
+                        resizeMode="contain"
+                        tintColor="#5D5F6D"
+                      />
+                    </TouchableOpacity>
+                  )}
                 </View>
               </View>
-              <View>
-                {isSearchActive ? (
-                  <SearchBar />
-                ) : (
-                  <TouchableOpacity onPress={() => setIsSearchActive(true)}>
-                    <Image
-                      source={images.search}
-                      className="size-6"
-                      resizeMode="contain"
-                      tintColor="#5D5F6D"
-                    />
-                  </TouchableOpacity>
-                )}
+              <View className="flex-row justify-between  gap-x-1 mt-5">
+                <View>
+                  <Text className="paragraph-bold  text-primary">
+                    DELIVERY LOCATION
+                  </Text>
+                  <Text className="paragraph-semibold text-dark-100">Home</Text>
+                </View>
+                <TouchableOpacity>
+                  <Text className="location-btn">Change Location</Text>
+                </TouchableOpacity>
               </View>
             </View>
           </View>

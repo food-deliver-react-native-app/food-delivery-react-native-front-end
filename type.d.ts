@@ -1,3 +1,4 @@
+import { ImageSourcePropType } from "react-native";
 import { Models } from "react-native-appwrite";
 
 export interface MenuItem extends Models.Document {
@@ -10,7 +11,6 @@ export interface MenuItem extends Models.Document {
   protein: number;
   rating: number;
   costumizations: CartCustomization[];
-  image_url: string;
   category: Category;
   type: string;
 }
@@ -39,11 +39,7 @@ export type CartItemType = {
   id: string;
   menuId: string;
   quantity: number;
-  menu?: {
-    id: string;
-    name: string;
-    price: number;
-  };
+  menu?: MenuItem;
   customizations?: {
     costumization: {
       id: string;

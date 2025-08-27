@@ -1,9 +1,8 @@
 import { images } from "@/constants";
 import useCartStore from "@/store/cart.store";
 import { router } from "expo-router";
-import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
-
+import React = require("react");
 
 const CartButton = () => {
   const { items } = useCartStore();

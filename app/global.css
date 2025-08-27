@@ -21,6 +21,10 @@
     @apply flex items-center justify-center size-10 rounded-full bg-dark-100;
   }
 
+  .cart-card {
+    @apply bg-white p-2 rounded-lg flex-row  w-full justify-between;
+  }
+
   .cart-badge {
     @apply absolute -top-2 -right-1 flex items-center justify-center size-5 bg-primary rounded-full;
   }
@@ -35,6 +39,9 @@
 
   .cart-item__actions {
     @apply flex flex-row items-center justify-center size-5 bg-primary/10 rounded-md;
+  }
+  .location-btn {
+    @apply border border-primary  rounded-full p-3 text-primary font-semibold;
   }
 
   .custom-btn {

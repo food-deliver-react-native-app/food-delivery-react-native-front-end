@@ -2,8 +2,9 @@ import CustomButton from "@/components/CustomButton";
 import CustomInput from "@/components/CustomInput";
 import { signIn } from "@/lib/auth";
 import { Link, router } from "expo-router";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Alert, Text, View } from "react-native";
+import React = require("react");
 
 const SignIn = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);

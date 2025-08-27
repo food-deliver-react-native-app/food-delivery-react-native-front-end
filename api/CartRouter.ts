@@ -8,6 +8,7 @@ interface AddCartItemData {
   customizations?: string[];
 }
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL;
+const API_PUBLIC_URL = process.env.EXPO_PUBLIC_API_BROWSER_URL;
 
 export const postCart = async (data: AddCartItemData) => {
   try {
@@ -34,9 +35,9 @@ export const postCart = async (data: AddCartItemData) => {
 export const getCartItems = async () => {
   try {
     const token = await getToken();
-    const res = await axios.get(`${API_BASE_URL}cart/get`, {
+    const res = await axios.get(`${API_PUBLIC_URL}cart/get`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGExZDAzZjNlMGIxYzlkNTk0YTMzYTgiLCJpYXQiOjE3NTYzMDQ3MTYsImV4cCI6MTc1NjM5MTExNn0.qOdFb8cHwfBoAO1hjoiEmk7fMq2F7F3GUbVHJN9BKDY`}`,
       },
     });
 
