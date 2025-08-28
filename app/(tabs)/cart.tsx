@@ -3,8 +3,8 @@ import SearchBar from "@/components/SearchBar";
 import { images } from "@/constants";
 import useCartStore from "@/store/cart.store";
 import { CartItemType } from "@/type";
-import { router } from "expo-router";
-import { useState } from "react";
+import { router, usePathname } from "expo-router";
+import { useEffect, useState } from "react";
 
 import {
   FlatList,
@@ -14,16 +14,16 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import cn = require("clsx");
 import React = require("react");
 
 const Cart = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
   const { items: data, fetchCart } = useCartStore();
+  const pathname = usePathname();
 
-  // useEffect(() => {
-  //   fetchCart();
-  // }, []);
+  useEffect(() => {
+    fetchCart();
+  }, [pathname]);
 
   return (
     <SafeAreaView className="h-full">
@@ -70,21 +70,19 @@ const Cart = () => {
             </View>
           </View>
         )}
-        // ListEmptyComponent={() =>
-        //   !loading && (
-        //     <View className="flex-center">
-        //       <Image
-        //         className="size-full"
-        //         resizeMode="contain"
-        //         source={images.emptyState}
-        //       />
-        //       <Text className="h3-bold">Nothing matched your search</Text>
-        //       <Text className="base-regular mt-2">
-        //         Try a different search term or check for typos.
-        //       </Text>
-        //     </View>
-        //   )
-        // }
+        ListEmptyComponent={() => (
+          <View className="flex-center pt-40">
+            <Image
+              className="size-full"
+              resizeMode="contain"
+              source={images.emptyState}
+            />
+            <Text className="h3-bold">Your cart is empty</Text>
+            <Text className="base-regular mt-2">
+              add items first, before checkout.
+            </Text>
+          </View>
+        )}
       />
     </SafeAreaView>
   );

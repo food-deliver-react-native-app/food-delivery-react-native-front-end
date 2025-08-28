@@ -1,24 +1,40 @@
 import { images } from "@/constants";
 import useCartStore from "@/store/cart.store";
 import { CartItemType } from "@/type";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { useState } from "react";
+import {
+  ActivityIndicator,
+  Image,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React = require("react");
 
 const CartCard = ({ item }: { item: CartItemType }) => {
-  const { fetchCart, addItem, deleteCartItem } = useCartStore();
+  const { addItem, deleteCartItem } = useCartStore();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const HandleDeleteCart = async (id: string, menuId?: string) => {
-    await deleteCartItem({ id: id, menuId: menuId });
-    await fetchCart();
+    try {
+      setIsLoading(true);
+      await deleteCartItem({ id: id, menuId: menuId });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const addItemInCart = async (item: CartItemType) => {
-    await addItem({
-      menuId: item.menu?.id,
-      quantity: 1,
-      customizations: [],
-    });
-    await fetchCart();
+    try {
+      setIsLoading(true);
+      await addItem({
+        menuId: item.menu?.id,
+        quantity: 1,
+        customizations: [],
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -44,7 +60,13 @@ const CartCard = ({ item }: { item: CartItemType }) => {
             >
               <Text className="text-primary text-3xl -translate-y-1">-</Text>
             </TouchableOpacity>
-            <Text className="h3-bold">{item.quantity}</Text>
+            <Text className="h3-bold">
+              {isLoading ? (
+                <ActivityIndicator size="small" color="#F97316" />
+              ) : (
+                item.quantity
+              )}
+            </Text>
             <TouchableOpacity
               onPress={() => addItemInCart(item)}
               className="bg-orange-100 overflow-visible h-8 w-8 flex items-center rounded-lg"

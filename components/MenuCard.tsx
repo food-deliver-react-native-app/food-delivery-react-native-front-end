@@ -1,17 +1,22 @@
 import useCartStore from "@/store/cart.store";
 import { MenuItem } from "@/type";
+import cn from "clsx";
 import React from "react";
 import { Image, Platform, Text, TouchableOpacity } from "react-native";
 
 const MenuCard = ({ item }: { item: MenuItem }) => {
-  const { addItem } = useCartStore();
+  const { addItem, items } = useCartStore();
 
   const addItemInCart = async () => {
-    addItem({
+    await addItem({
       menuId: item.id,
       quantity: 1,
       customizations: [],
     });
+  };
+
+  const handleIsCart = (id: string) => {
+    return items.some((item) => item.menu.id === id);
   };
 
   return (
@@ -37,8 +42,18 @@ const MenuCard = ({ item }: { item: MenuItem }) => {
       <Text className="body-regular text-gray-200 mb-4">
         From ${item.price}
       </Text>
-      <TouchableOpacity onPress={addItemInCart}>
-        <Text className="paragraph-bold">Add to Cart</Text>
+      <TouchableOpacity
+        disabled={handleIsCart(item.id)}
+        onPress={addItemInCart}
+      >
+        <Text
+          className={cn(
+            "paragraph-bold",
+            handleIsCart(item.id) && "text-primary"
+          )}
+        >
+          {handleIsCart(item.id) ? "in Cart" : "Add to Cart"}
+        </Text>
       </TouchableOpacity>
     </TouchableOpacity>
   );
