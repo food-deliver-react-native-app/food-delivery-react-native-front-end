@@ -18,7 +18,6 @@ export const postCart = async (data: AddCartItemData) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    await getCartItems();
     return res.data;
   } catch (err) {
     const axiosErr = err as AxiosError;
@@ -35,9 +34,9 @@ export const postCart = async (data: AddCartItemData) => {
 export const getCartItems = async () => {
   try {
     const token = await getToken();
-    const res = await axios.get(`${API_PUBLIC_URL}cart/get`, {
+    const res = await axios.get(`${API_BASE_URL}cart/get`, {
       headers: {
-        Authorization: `Bearer ${`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGExZDAzZjNlMGIxYzlkNTk0YTMzYTgiLCJpYXQiOjE3NTYzMDQ3MTYsImV4cCI6MTc1NjM5MTExNn0.qOdFb8cHwfBoAO1hjoiEmk7fMq2F7F3GUbVHJN9BKDY`}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -48,6 +47,33 @@ export const getCartItems = async () => {
       (axiosErr.response?.data as any)?.error ||
       axiosErr.message ||
       "Failed to fetch cart";
+
+    Alert.alert("Cart Error", errorMessage);
+    throw new Error(errorMessage);
+  }
+};
+
+export const deleteCartItem = async (cartItemId: string, menuId?: string) => {
+  try {
+    const token = await getToken();
+
+    const res = await axios.delete(`${API_BASE_URL}cart/delete`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: {
+        cartItemId,
+        menuId,
+      },
+    });
+
+    return res.data;
+  } catch (err) {
+    const axiosErr = err as AxiosError;
+    const errorMessage =
+      (axiosErr.response?.data as any)?.error ||
+      axiosErr.message ||
+      "Failed to delete item from cart";
 
     Alert.alert("Cart Error", errorMessage);
     throw new Error(errorMessage);

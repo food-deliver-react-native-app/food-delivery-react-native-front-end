@@ -39,7 +39,7 @@ export type CartItemType = {
   id: string;
   menuId: string;
   quantity: number;
-  menu?: MenuItem;
+  menu: MenuItem;
   customizations?: {
     costumization: {
       id: string;

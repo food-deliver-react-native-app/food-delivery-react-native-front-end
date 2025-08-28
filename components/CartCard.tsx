@@ -1,9 +1,26 @@
 import { images } from "@/constants";
+import useCartStore from "@/store/cart.store";
 import { CartItemType } from "@/type";
-import { Image, Text, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import React = require("react");
 
 const CartCard = ({ item }: { item: CartItemType }) => {
+  const { fetchCart, addItem, deleteCartItem } = useCartStore();
+
+  const HandleDeleteCart = async (id: string, menuId?: string) => {
+    await deleteCartItem({ id: id, menuId: menuId });
+    await fetchCart();
+  };
+
+  const addItemInCart = async (item: CartItemType) => {
+    await addItem({
+      menuId: item.menu?.id,
+      quantity: 1,
+      customizations: [],
+    });
+    await fetchCart();
+  };
+
   return (
     <View className="cart-card">
       <View className="flex-row gap-2 items-center">
@@ -21,21 +38,28 @@ const CartCard = ({ item }: { item: CartItemType }) => {
             </Text>
           </View>
           <View className="flex-row items-center gap-4">
-            <View className="bg-orange-100 overflow-visible h-8 w-8 flex items-center rounded-lg">
+            <TouchableOpacity
+              onPress={() => HandleDeleteCart(item.id, item.menu.id)}
+              className="bg-orange-100 overflow-visible h-8 w-8 flex items-center rounded-lg"
+            >
               <Text className="text-primary text-3xl -translate-y-1">-</Text>
-            </View>
+            </TouchableOpacity>
             <Text className="h3-bold">{item.quantity}</Text>
-            <View className="bg-orange-100 overflow-visible h-8 w-8 flex items-center rounded-lg">
+            <TouchableOpacity
+              onPress={() => addItemInCart(item)}
+              className="bg-orange-100 overflow-visible h-8 w-8 flex items-center rounded-lg"
+            >
               <Text className="text-primary text-3xl -translate-y-1">+</Text>
-            </View>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
-      <Image
-        resizeMode="contain"
-        className="size-6 flex self-end"
-        source={images.trash}
-      />
+      <TouchableOpacity
+        onPress={() => HandleDeleteCart(item.id)}
+        className="flex self-end"
+      >
+        <Image resizeMode="contain" className="size-6 " source={images.trash} />
+      </TouchableOpacity>
     </View>
   );
 };

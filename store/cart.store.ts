@@ -1,4 +1,4 @@
-import { getCartItems, postCart } from "@/api/CartRouter";
+import { deleteCartItem, getCartItems, postCart } from "@/api/CartRouter";
 import { CartItemType } from "@/type";
 import { create } from "zustand";
 
@@ -12,6 +12,7 @@ type CartState = {
     quantity?: number;
     customizations?: string[];
   }) => Promise<void>;
+  deleteCartItem: (params: { id: string; menuId?: string }) => Promise<void>;
   clearCart: () => void;
 };
 
@@ -33,18 +34,26 @@ const useCartStore = create<CartState>((set) => ({
 
   addItem: async ({ menuId, quantity = 1, customizations = [] }) => {
     try {
-      const updatedCartItem = await postCart({
+      await postCart({
         menuId,
         quantity,
         customizations,
       });
-
-      set((state) => {
-        const filtered = state.items.filter((i) => i.id !== updatedCartItem.id);
-        return { items: [...filtered, updatedCartItem] };
-      });
     } catch (err) {
       console.error("Failed to add item to cart", err);
+    } finally {
+      set({ isLoading: false });
+    }
+  },
+  deleteCartItem: async ({ id, menuId }) => {
+    set({ isLoading: true });
+    try {
+      await deleteCartItem(id, menuId);
+      set((state) => ({
+        items: state.items.filter((item) => item.id !== id),
+      }));
+    } catch (error) {
+      console.error("Failed to delete cart item", error);
     } finally {
       set({ isLoading: false });
     }

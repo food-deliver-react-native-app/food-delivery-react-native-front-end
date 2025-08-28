@@ -4,7 +4,8 @@ import { images } from "@/constants";
 import useCartStore from "@/store/cart.store";
 import { CartItemType } from "@/type";
 import { router } from "expo-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
 import {
   FlatList,
   Image,
@@ -17,24 +18,19 @@ import cn = require("clsx");
 import React = require("react");
 
 const Cart = () => {
+  const [isSearchActive, setIsSearchActive] = useState(false);
   const { items: data, fetchCart } = useCartStore();
 
-  useEffect(() => {
-    fetchCart();
-  }, []);
-
-  const [isSearchActive, setIsSearchActive] = useState(false);
+  // useEffect(() => {
+  //   fetchCart();
+  // }, []);
 
   return (
     <SafeAreaView className="h-full">
       <FlatList
         data={data}
         renderItem={({ item }) => {
-          return (
-            <View key={item.id}>
-              <CartCard item={item as CartItemType} />
-            </View>
-          );
+          return <CartCard key={item.id} item={item as CartItemType} />;
         }}
         keyExtractor={(item) => item.id}
         contentContainerClassName="gap-5 px-5 pb-32"
