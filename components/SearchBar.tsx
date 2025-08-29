@@ -1,6 +1,6 @@
 import { images } from "@/constants";
-import { router, useLocalSearchParams, usePathname } from "expo-router";
-import React, { useEffect, useState } from "react";
+import { router, useLocalSearchParams } from "expo-router";
+import React, { useState } from "react";
 import { Image, TextInput, TouchableOpacity, View } from "react-native";
 
 const SearchBar = () => {
@@ -19,13 +19,6 @@ const SearchBar = () => {
         params: { query },
       });
   };
-  const path = usePathname();
-  console.log(path);
-
-  useEffect(() => {
-    if (path === "/cart") {
-    }
-  }, [path]);
 
   return (
     <View className="searchbar">
