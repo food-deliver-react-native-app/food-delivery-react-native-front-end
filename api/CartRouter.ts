@@ -15,7 +15,7 @@ export const postCart = async (data: AddCartItemData) => {
     const token = await getToken();
     const res = await axios.post(`${API_PUBLIC_URL}cart/add`, data, {
       headers: {
-        Authorization: `Bearer ${`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGIwMzdlYzVmZTA5MTQyNTk3NmZmZmMiLCJpYXQiOjE3NTYzNzk2NDcsImV4cCI6MTc1NjQ2NjA0N30.pfAOIHKI6xNBjt6NGqgzu8zBdDVtPa6qcyZxWulXcEw`}`,
+        Authorization: `Bearer ${`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGIwMzdlYzVmZTA5MTQyNTk3NmZmZmMiLCJpYXQiOjE3NTY1NDk1NDgsImV4cCI6MTc1NjYzNTk0OH0.GImGcXrwDtigra0TRcbmtZAzJ9z13rJBjXbU1nqvNXo`}`,
       },
     });
     return res.data;
@@ -36,7 +36,7 @@ export const getCartItems = async () => {
     const token = await getToken();
     const res = await axios.get(`${API_PUBLIC_URL}cart/get`, {
       headers: {
-        Authorization: `Bearer ${`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGIwMzdlYzVmZTA5MTQyNTk3NmZmZmMiLCJpYXQiOjE3NTYzNzk2NDcsImV4cCI6MTc1NjQ2NjA0N30.pfAOIHKI6xNBjt6NGqgzu8zBdDVtPa6qcyZxWulXcEw`}`,
+        Authorization: `Bearer ${`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGIwMzdlYzVmZTA5MTQyNTk3NmZmZmMiLCJpYXQiOjE3NTY1NDk1NDgsImV4cCI6MTc1NjYzNTk0OH0.GImGcXrwDtigra0TRcbmtZAzJ9z13rJBjXbU1nqvNXo`}`,
       },
     });
 
@@ -59,7 +59,7 @@ export const deleteCartItem = async (cartItemId: string, menuId?: string) => {
 
     const res = await axios.delete(`${API_PUBLIC_URL}cart/delete`, {
       headers: {
-        Authorization: `Bearer ${`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGIwMzdlYzVmZTA5MTQyNTk3NmZmZmMiLCJpYXQiOjE3NTYzNzk2NDcsImV4cCI6MTc1NjQ2NjA0N30.pfAOIHKI6xNBjt6NGqgzu8zBdDVtPa6qcyZxWulXcEw`}`,
+        Authorization: `Bearer ${`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGIwMzdlYzVmZTA5MTQyNTk3NmZmZmMiLCJpYXQiOjE3NTY1NDk1NDgsImV4cCI6MTc1NjYzNTk0OH0.GImGcXrwDtigra0TRcbmtZAzJ9z13rJBjXbU1nqvNXo`}`,
       },
       data: {
         cartItemId,

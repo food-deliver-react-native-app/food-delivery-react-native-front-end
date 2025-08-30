@@ -118,7 +118,7 @@ const Cart = () => {
         )}
         ListHeaderComponent={() => (
           <View className="my-5 gap-5">
-            <View className=" w-full">
+            <View className="w-full">
               <View className="flex-row justify-between">
                 <TouchableOpacity onPress={() => router.back()}>
                   <Image source={images.arrowBack} className="size-6" />

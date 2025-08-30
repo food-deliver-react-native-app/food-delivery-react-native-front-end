@@ -1,12 +1,12 @@
 import useCartStore from "@/store/cart.store";
 import { MenuItem } from "@/type";
 import cn from "clsx";
+import { router } from "expo-router";
 import React from "react";
 import { Image, Platform, Text, TouchableOpacity } from "react-native";
 
 const MenuCard = ({ item }: { item: MenuItem }) => {
   const { addItem, items } = useCartStore();
-
   const addItemInCart = async () => {
     await addItem({
       menuId: item.id,
@@ -21,6 +21,12 @@ const MenuCard = ({ item }: { item: MenuItem }) => {
 
   return (
     <TouchableOpacity
+      onPress={() =>
+        router.push({
+          pathname: "/product/[id]",
+          params: { id: item.id },
+        })
+      }
       className="menu-card"
       style={
         Platform.OS === "android"

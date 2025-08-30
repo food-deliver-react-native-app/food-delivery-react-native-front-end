@@ -57,7 +57,7 @@ export const getCurrentUser = async () => {
       throw new Error("No token found");
     }
 
-    const response = await axios.get(`http://localhost:8000/auth/user`, {
+    const response = await axios.get(`${API_BROWSER_URL}auth/user`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
